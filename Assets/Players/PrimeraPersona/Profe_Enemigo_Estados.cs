@@ -24,10 +24,10 @@ public class Profe_Enemigo_Estados : MonoBehaviour
     {
         agente = GetComponent<NavMeshAgent>();
         objetivo = GameObject.FindWithTag("Player").transform;
+        anim = transform.GetChild(0).GetComponent<Animator>();
 
         posInicial = transform.position;
         rotInicial = transform.rotation;
-        anim = transform.GetChild(0).GetComponent<Animator>();
         
     }
 
@@ -78,14 +78,16 @@ public class Profe_Enemigo_Estados : MonoBehaviour
 
                 agente.isStopped = false;
                 agente.stoppingDistance = 1.25f;
-                anim.SetBool("corriendo", true);
+
                 contadorTiempo = 0f;
+                anim.SetBool("corriendo", true);
                 break;
             // --------------------------------------------
             case Estados.PlayerPerdido:
 
                 agente.stoppingDistance = 0f;
                 contadorTiempo = 0f;
+
                 anim.SetBool("corriendo", false);
                 break;
             // --------------------------------------------
@@ -95,6 +97,7 @@ public class Profe_Enemigo_Estados : MonoBehaviour
 
                 contadorTiempo = 0f;
                 agente.SetDestination(posInicial);
+
                 anim.SetBool("corriendo", true);
                 break;
             // --------------------------------------------

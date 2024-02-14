@@ -8,6 +8,7 @@ TagManager:
   - Bloqueos
   - CambiaPlanos
   - Enemigos
+  - ZonaSegura
   layers:
   - Default
   - TransparentFX
