@@ -9,6 +9,7 @@ TagManager:
   - CambiaPlanos
   - Enemigos
   - ZonaSegura
+  - Balas
   layers:
   - Default
   - TransparentFX

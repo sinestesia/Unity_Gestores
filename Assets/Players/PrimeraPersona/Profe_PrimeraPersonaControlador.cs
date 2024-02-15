@@ -54,4 +54,14 @@ public class Profe_PrimeraPersonaControlador : MonoBehaviour
     {
         rb.MovePosition(rb.position + dirMovimiento * velocidad * Time.deltaTime);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Balas"))
+        {
+            rb.velocity = Vector3.zero;
+            Destroy(collision.gameObject);
+        }
+    }
+
 }

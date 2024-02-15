@@ -12,13 +12,11 @@ public class Profe_Enemigo_Asustado : MonoBehaviour
     public Estados estado;
 
     float contadorTiempo;
+    Vector3 posInicial;
 
     Transform zonaSegura;
     NavMeshAgent agente;
-    Vector3 posInicial;
-
     Animator anim;
-
     #endregion
     // ---------------------------------------------------------------
     #region 2) FUNCIONES PREDET. UNITY
