@@ -23,12 +23,8 @@ public class TanqueControlador : MonoBehaviour
         ejesVirtuales.x = Input.GetAxisRaw("Horizontal");
         ejesVirtuales.y = Input.GetAxisRaw("Vertical");
 
-        if (ejesVirtuales.y != 0f)
-        {
-
-            angulosRot += ejesVirtuales.x * velRotacion * Time.deltaTime;
-            transform.rotation = Quaternion.Euler(Vector3.up * angulosRot);
-        }
+        angulosRot += ejesVirtuales.x * velRotacion * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(Vector3.up * angulosRot);
     }
 
     private void FixedUpdate()

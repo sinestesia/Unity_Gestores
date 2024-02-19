@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// 
@@ -11,24 +12,23 @@ using UnityEngine;
 public class AnimatorAvanzado : MonoBehaviour
 {
     Animator anim;
+    NavMeshAgent agente;
 
     [Range(0f, 1f)]
     public float influenciaMirarHacia;
 
-    public bool modoMirar;
     public Transform objetivo;
 
     private void Awake()
     {
+        agente = transform.parent.GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
     }
 
     private void OnAnimatorIK()
     {
-        if (modoMirar)
-        {
-            anim.SetLookAtPosition(objetivo.position);
-            anim.SetLookAtWeight(influenciaMirarHacia, 0.125f, 1f);
-        }
+        anim.SetLookAtPosition(objetivo.position);
+        anim.SetLookAtWeight(influenciaMirarHacia, 0.125f, 1f);
+        
     }
 }
