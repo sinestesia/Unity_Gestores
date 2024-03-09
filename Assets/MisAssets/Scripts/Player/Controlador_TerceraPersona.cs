@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Cinemachine;
 
 public class Controlador_TerceraPersona : MonoBehaviour
 {
+    public static Controlador_TerceraPersona instancia;
+
     public Movimiento movimiento;
 
     public float velTraslacion;
@@ -24,6 +27,8 @@ public class Controlador_TerceraPersona : MonoBehaviour
 
     private void Awake()
     {
+        instancia = this;
+
         cam = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
     }
@@ -31,6 +36,7 @@ public class Controlador_TerceraPersona : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Invoke("BuscarCamara", 0.25f);
         EstablecerMovimiento(movimiento);        
     }
 
@@ -162,6 +168,37 @@ public class Controlador_TerceraPersona : MonoBehaviour
         if (estaAgachado) velTraslacion = 1f;
         else velTraslacion = 3f;
     }
+
+    public  Vector2 AccederValoresCamaraVirtualActiva()
+    {
+        Vector2 _valoresHV = new Vector2(vcActiva.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value,
+            vcActiva.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value);
+
+        return _valoresHV;
+    }
+
+    CinemachineVirtualCamera vcActiva;
+
+
+    public void BuscarCamara()
+    {
+        var brain = CinemachineCore.Instance.GetActiveBrain(0);
+        vcActiva = brain.ActiveVirtualCamera as CinemachineVirtualCamera;
+
+        transform.position = PlayerDataManager.instancia.datosPlayer.posicion;
+        transform.rotation = PlayerDataManager.instancia.datosPlayer.rotacion;
+
+        ActualizarPosRotCamara();
+    }
+
+    void ActualizarPosRotCamara()
+    {
+        Vector2 _valores = AccederValoresCamaraVirtualActiva();
+
+        vcActiva.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = PlayerDataManager.instancia.datosPlayer.rotCamH;
+        vcActiva.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = PlayerDataManager.instancia.datosPlayer.rotCamV;        
+    }
+
 
     public enum Movimiento
     {

@@ -17,7 +17,7 @@ public class PlayerDataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -99,4 +99,22 @@ public class DatosPlayer
     public float vidaMax;
 
     public int monedas;
+    public bool[] monedasRecogidasNivel1;
+
+
+    // Player
+    public Vector3 posicion;
+    public Quaternion rotacion;
+
+    // Camara
+    public float rotCamH;
+    public float rotCamV;
+
+}
+
+[Serializable]
+public class EnemigoData
+{
+    public Vector3 posicion;
+    public Quaternion rotacion;
 }
